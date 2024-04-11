@@ -1,89 +1,67 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import { useStateValues } from "./Utils/Provider";
-import { useEffect } from "react";
-import AllRelatedRecipes from "./pages/AllRelatedRecipes";
-import Description from "./pages/Description";
-import Shop from "./pages/Shop";
-import Cart from "./components/Cart";
-import NotFound from "./pages/NotFound";
-import Favourites from "./pages/Favourites";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import Details from "./pages/Deatils";
+import Saved from "./pages/Saved";
+import AllUsers from "./pages/AllUsers";
+import CreatePost from "./pages/CreatePost";
+import PostDetails from "./pages/PostDetails";
+import Explore from "./pages/Explore";
+import EditPost from "./pages/EditPost";
 import Profile from "./pages/Profile";
-
+import UpdateProfile from "./pages/UpdateProfile";
+import NotFound from "./pages/NotFound";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import { useEffect } from "react";
+import { ToastContainer } from "react-toast";
+import Layout from "./Layout";
 
 
 function App() {
-
-  const [{ abc }, dispatch] = useStateValues();
-
-  if (abc) {
-    console.log(abc);
-  }
+  const [{ user }, dispatch] = useStateValues();
 
   useEffect((() => {
-    const data = localStorage.getItem("token");
-    let cart = localStorage.getItem("cart");
-
-    if (data) {
-
-      dispatch({
-        type: "SET_TOKEN",
-        token: (JSON.parse(localStorage.token)),
-      });
-
+    const loggedinuser = localStorage.getItem('user');
+   
+    if (loggedinuser) {
       dispatch({
         type: "SET_USER",
-        user: (JSON.parse(localStorage.user)),
-      });
-
-    }
-    else {
-      dispatch({
-        type: "SET_USER",
-        user: null,
+        user: JSON.parse(loggedinuser)
       })
     }
 
-    if (cart) {
-      cart = JSON.parse(localStorage.cart)
-      dispatch({
-        type: "SET_CART_DATA",
-        cartData: (cart),
-
-      })
-    }
-    else if (!cart) {
-      dispatch({
-        type: "SET_CART_DATA",
-        cartData: [],
-      })
-    }
-    dispatch({
-      type: "SET_TOTAL_AMOUNT",
-      totalAmt: 0,
-    })
-
-  }
-  ), [dispatch])
-
+  }), [dispatch])
 
   return (
-    <div className="App">
+    <div className="">
+      <ToastContainer />
+      {!user &&
+
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/sign-up" element={<Signup />} />
+          <Route path="*" element={<Login />} />
+        </Routes>
+      }
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/shop" element={<Shop />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/description" element={<Description />} />
-        <Route path="/food/:id" element={<Details />} />
-        <Route path="/:query" element={<AllRelatedRecipes />} />
-        <Route path="/favourites" element={<Favourites />} />
-        <Route path="*" element={<NotFound />} />
+        {
+          user &&
+          <>
+            <Route element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path="/explore" element={<Explore />} />
+              <Route path="/saved" element={<Saved />} />
+              <Route path="/all-users" element={<AllUsers />} />
+              <Route path="/create-post" element={<CreatePost />} />
+              <Route path="/update-post/:id" element={<EditPost />} />
+              <Route path="/posts/:id" element={<PostDetails />} />
+              <Route path="/profile/:id/*" element={<Profile />} />
+              <Route path="/update-profile/:id" element={<UpdateProfile />} />
+              <Route path="*" element={<NotFound />} />
+            </Route >
+          </>}
+        <Route path="*"  />
       </Routes>
     </div>
   );

@@ -7,9 +7,10 @@ import { NewContextProvider } from './Utils/Provider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <NewContextProvider>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </NewContextProvider>
+   <NewContextProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </NewContextProvider>
+
 );

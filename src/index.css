@@ -11,75 +11,26 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
  overflow-x: hidden;
+background-color: #000000;
+color: white;
+height: 100vh;
 
   }
-  .img{
-    transition: all;
-    transition-duration:0.3s;
-    transition-timing-function: ease-in;
-  
-  }
-.img:hover{
- 
-  transform: scale(1.2);
-}
-
-
-.category{
-  transition: all;
-  transition-duration:0.3s;
-  transition-timing-function:cubic-bezier(0.075, 0.82, 0.165, 1);
-
-}
-.category:hover{
-
-transform: scale(1.2);
-}
-
-category
-
-  .image{
-    background-repeat: no-repeat;
-    height:100vh;
-    background-size: cover;
-    background-image: url("https://static.vecteezy.com/system/resources/previews/003/690/407/original/food-delivery-online-on-phone-orange-background-illustration-fastfood-design-concept-business-shop-promotion-transport-to-home-free-vector.jpg");
-  }
-  
-  @media only screen and (max-width: 900px) {
-   .hamburger {
-   
-     border:2px solid black;
-     width: 15rem;
-     padding: 2rem;
-     text-align: center;
-z-index:2;
-position: absolute;
-user-select: auto;
-margin: 2.5rem -13.5rem;
-
-     border-radius: 10px;
-     background-color: white;
-    }
-  }
-  .hamburger > li{
-    padding: 6px;
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+    border-radius: 2px;
   }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #09090a;
+  }
 
-.fade-anim img {
-  animation: fadeAnime 0.5s ease-out;
-} 
-@keyframes fadeAnime {
-  from {
-    transform: translateX(-10%);
-    opacity: 0;
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #5c5c7b;
+    border-radius: 50px;
   }
-  to{
-    transform: translateX(0);
-    opacity: 1;
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #7878a3;
   }
-}
