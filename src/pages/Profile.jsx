@@ -1,6 +1,6 @@
 import { Route, Routes, Link, Outlet, useParams, useLocation, } from "react-router-dom";
 import { useStateValues } from "../Utils/Provider";
-import { getUserById } from "../backend/auth/api";
+import { getUserById } from "../backend/api";
 import Loader from "../components/Loader";
 import GridPostList from "../components/GridPostList";
 import LikedPosts from "./LikedPost";

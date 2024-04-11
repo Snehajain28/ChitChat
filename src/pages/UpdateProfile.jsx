@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useStateValues } from "../Utils/Provider";
-import { getUserById, updateUser } from "../backend/auth/api";
+import { getUserById, updateUser } from "../backend/api";
 import { useState } from "react";
 import Loader from "../components/Loader";
 import { toast } from "react-toast";

@@ -1,5 +1,5 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { getPostById, getUserById, deletePost } from "../backend/auth/api";
+import { getPostById, getUserById, deletePost } from "../backend/api";
 import { useStateValues } from "../Utils/Provider";
 import Loader from "../components/Loader";
 import PostStats from "../components/PostStats";

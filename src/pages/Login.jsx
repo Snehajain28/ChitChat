@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
 import { FaEye } from "react-icons/fa";
 import { TbEyeClosed } from "react-icons/tb";
-import { getCurrentUser, signInAccount } from "../backend/auth/api";
+import { getCurrentUser, signInAccount } from "../backend/api";
 import { useStateValues } from "../Utils/Provider";
 
 

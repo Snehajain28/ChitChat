@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
 import { FaEye } from "react-icons/fa";
 import { TbEyeClosed } from "react-icons/tb";
-import { createUserAccount } from "../backend/auth/api";
+import { createUserAccount } from "../backend/api";
 import { useStateValues } from "../Utils/Provider";
 import { passwordStrength } from 'check-password-strength'
 
@@ -41,7 +41,7 @@ const SignupForm = () => {
     }
     try {
       const newUser = await createUserAccount(formData);
-   console.log(newUser); 
+   
       if (!newUser) {
         toast("Sign up failed. Please try again.");
         return;

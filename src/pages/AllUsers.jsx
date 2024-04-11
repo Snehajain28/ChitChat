@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getUsers } from "../backend/auth/api";
+import { getUsers } from "../backend/api";
 import Loader from "../components/Loader";
 import UserCard from "../components/UserCard";
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { deleteSavedPost, getCurrentUser, likePost, savePost } from "../backend/auth/api";
+import { deleteSavedPost, getCurrentUser, likePost, savePost } from "../backend/api";
 import { FaHeart } from 'react-icons/fa'
 import {  BsSave, BsSaveFill } from 'react-icons/bs'
 

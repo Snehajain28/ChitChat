@@ -1,4 +1,4 @@
-import { getRecentPosts, getUsers } from "../backend/auth/api";
+import { getRecentPosts, getUsers } from "../backend/api";
 import { useCallback, useEffect, useState } from "react";
 import Loader from "../components/Loader";
 import PostCard from "../components/PostCard";

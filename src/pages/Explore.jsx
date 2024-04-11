@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import Loader from "../components/Loader";
 import GridPostList from "../components/GridPostList";
-import { getRecentPosts, searchPosts } from "../backend/auth/api";
+import { getRecentPosts, searchPosts } from "../backend/api";
 import { CiFilter, CiSearch } from "react-icons/ci";
 
 

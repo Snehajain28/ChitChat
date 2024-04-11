@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useStateValues } from "../Utils/Provider";
-import { createPost, updatePost } from "../backend/auth/api";
+import { createPost, updatePost } from "../backend/api";
 import { toast } from "react-toast";
 import FileUploader from "./FileUploader";
 import { useState } from "react";

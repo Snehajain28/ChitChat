@@ -1,4 +1,4 @@
-import { getCurrentUser } from "../backend/auth/api";
+import { getCurrentUser } from "../backend/api";
 import GridPostList from "../components/GridPostList";
 import Loader from "../components/Loader";
 

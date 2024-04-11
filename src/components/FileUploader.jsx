@@ -23,7 +23,7 @@ const FileUploader = ({ fieldChange, mediaUrl }) => {
       "image/*": [".png", ".jpeg", ".jpg"],
     },
   });
-
+console.log(file);
   return (
     <div
       {...getRootProps()}

@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { getPostById } from "../backend/auth/api";
+import { getPostById } from "../backend/api";
 import PostForm from "../components/PostForm";
 import { useEffect, useState } from "react";
 import Loader from "../components/Loader";
