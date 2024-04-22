@@ -1,9 +1,10 @@
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
+import { BiCamera } from "react-icons/bi";
 
 const convertFileToUrl = (file) => URL.createObjectURL(file)
 
-const ProfileUploader = ({ fieldChange, mediaUrl}) => {
+const ProfileUploader = ({ fieldChange, mediaUrl }) => {
   const [file, setFile] = useState([]);
   const [fileUrl, setFileUrl] = useState(mediaUrl);
 
@@ -15,7 +16,7 @@ const ProfileUploader = ({ fieldChange, mediaUrl}) => {
     },
     [fieldChange]
   );
-console.log(file);
+  console.log(file);
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
@@ -28,15 +29,15 @@ console.log(file);
     <div {...getRootProps()}>
       <input {...getInputProps()} className="cursor-pointer" />
 
-      <div className="cursor-pointer flex-center gap-4">
+      <div className="cursor-pointer flex justify-center">
         <img
-          src={fileUrl || "/assets/icons/profile-placeholder.svg"}
+          src={fileUrl}
           alt=""
-          className="h-24 w-24 rounded-full object-cover object-top"
+          className="h-20 w-20 rounded-full object-cover object-top"
         />
-        <p className="text-primary-500 small-regular md:bbase-semibold">
-          Change profile photo
-        </p>
+        <div className=" relative ">
+          <BiCamera className="absolute  -bottom-1 -right-2 text-[1.2rem]" />
+        </div>
       </div>
     </div>
   );

@@ -5,6 +5,10 @@ import Loader from "../components/Loader";
 import GridPostList from "../components/GridPostList";
 import LikedPosts from "./LikedPost";
 import { useCallback, useEffect, useState } from "react";
+import { LuPenLine } from "react-icons/lu";
+import { SlPicture } from "react-icons/sl";
+import { BiHeart } from "react-icons/bi";
+import PostCard from "../components/PostCard";
 
 
 
@@ -56,15 +60,15 @@ const Profile = () => {
 
             <div className="flex gap-8 mt-10 items-center justify-center xl:justify-start flex-wrap z-20">
 
-              <div className="flex justify-center items-center gap-2">
+              <div className="flex flex-col justify-center items-center gap-2">
                 <p className="text-[14px] font-semibold leading-[140%] tracking-tighter lg:text-[18px] lg:font-bold text-[#877EFF] ">{currentUser?.posts?.length}</p>
                 <p className="text-[14px] font-medium leading-[140%] lg:text-[16px] text-[#EFEFEF] ">{"Posts"}</p>
               </div>
-              <div className="flex justify-center items-center gap-2">
+              <div className="flex flex-col justify-center items-center gap-2">
                 <p className="text-[14px] font-semibold leading-[140%] tracking-tighter lg:text-[18px] lg:font-bold text-[#877EFF] ">{20} </p>
                 <p className="text-[14px] font-medium leading-[140%] lg:text-[16px] text-[#EFEFEF] ">{"Followers"}</p>
               </div>
-              <div className="flex justify-center items-center gap-2">
+              <div className="flex flex-col justify-center items-center gap-2">
                 <p className="text-[14px] font-semibold leading-[140%] tracking-tighter lg:text-[18px] lg:font-bold text-[#877EFF] ">{20}</p>
                 <p className="text-[14px] font-medium leading-[140%] lg:text-[16px] text-[#EFEFEF] ">{"Following"}</p>
               </div>
@@ -74,26 +78,20 @@ const Profile = () => {
               {currentUser.bio}
             </p>
           </div>
-
           <div className="flex justify-center gap-4">
-            <div className={`${user.id !== currentUser.$id && "hidden"}`}>
+            <div>
               <Link
                 to={`/update-profile/${currentUser.$id}`}
-                className={`h-12 bg-[#1F1F22] px-5 text-[#FFFFFF] flex justify-center items-center gap-2 rounded-lg ${user.id !== currentUser.$id && "hidden"
+                className={`h-12 bg-[#1F1F22] px-5 text-[#FFFFFF] flex justify-center items-center gap-2 rounded-lg ${user.$id !== currentUser.$id && "hidden"
                   }`}>
-                <img
-                  src={"/assets/icons/edit.svg"}
-                  alt="edit"
-                  width={20}
-                  height={20}
-                />
+                <LuPenLine />
                 <p className="flex whitespace-nowrap text-[14px] font-medium leading-[140%]">
                   Edit Profile
                 </p>
               </Link>
             </div>
-            <div className={`${user.id === id && "hidden"}`}>
-              <button className="bg-[#877EFF] hover:bg-[#5D5FEF] text-[#FFFFFF] flex gap-2 px-8">
+            <div className={`${user.$id === id && "hidden"}`}>
+              <button className="bg-[#877EFF] hover:bg-[#5D5FEF] text-[#FFFFFF] flex gap-2 py-2 px-8">
                 Follow
               </button>
             </div>
@@ -101,46 +99,70 @@ const Profile = () => {
         </div>
       </div>
 
-      {currentUser.$id === user.id && (
+      {currentUser.$id === user.$id && (
         <div className="flex max-w-5xl w-full">
           <Link
             to={`/profile/${id}`}
             className={`flex justify-center items-center gap-3 py-4 w-48 bg-[#09090A]  transition flex-1 xl:flex-initial rounded-l-lg ${pathname === `/profile/${id}` && "!bg-dark-3"
               }`}>
-            <img
-              src={"/assets/icons/posts.svg"}
-              alt="posts"
-              width={20}
-              height={20}
-            />
+            <SlPicture />
             Posts
           </Link>
           <Link
             to={`/profile/${id}/liked-posts`}
             className={` flex justify-center items-center gap-3 py-4 w-48 bg-[#09090A]  transition flex-1 xl:flex-initial rounded-r-lg ${pathname === `/profile/${id}/liked-posts` && "!bg-dark-3"
               }`}>
-            <img
-              src={"/assets/icons/like.svg"}
-              alt="like"
-              width={20}
-              height={20}
-            />
+            <BiHeart />
             Liked Posts
           </Link>
         </div>
       )}
 
+      {currentUser.$id === user.$id ? (<>
+        {
+          currentUser?.posts.length === 0 ?
+            (<Link to={'/create-post'}>
+              + Create Posts
+            </Link>) : (
+              <div>
+                {currentUser?.posts.map((post) => {
+                  return <PostCard post={post} />
+                })
+
+                }
+              </div>
+            )
+        }
+      </>
+      ) :
+        (
+          <>
+        {
+          currentUser?.posts.length === 0 ?
+            (<div>
+            No Posts
+            </div>) : (
+              <div>
+              <GridPostList posts={currentUser.posts} />
+  
+              </div>
+            )
+        }
+      </>
+        )
+      }
+   
       <Routes>
         <Route
           index
           element={<GridPostList posts={currentUser.posts} showUser={false} />}
         />
-        {currentUser.$id === user.id && (
+        {currentUser.$id === user.$id && (
           <Route path="/liked-posts" element={<LikedPosts />} />
         )}
       </Routes>
       <Outlet />
-    </div>
+    </div >
   );
 };
 

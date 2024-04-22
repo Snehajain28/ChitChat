@@ -22,7 +22,7 @@ function App() {
 
   useEffect((() => {
     const loggedinuser = localStorage.getItem('user');
-  
+ 
     if (loggedinuser) {
       dispatch({
         type: "SET_USER",

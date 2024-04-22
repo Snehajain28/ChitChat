@@ -65,7 +65,7 @@ const PostStats = ({ post, userId }) => {
             (<FaHeart className="cursor-pointer text-red-600" onClick={(e) => handleLikePost(e)} />) :
             (<FaHeart className="cursor-pointer" onClick={(e) => handleLikePost(e)} />)
         }
-        <p className="small-medium lg:base-medium">{likes.length}</p>
+        <p className=" cursor-pointer small-medium lg:base-medium">{likes.length}</p>
       </div>
 
       <div className="flex  gap-2">

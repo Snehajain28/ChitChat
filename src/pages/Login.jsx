@@ -65,7 +65,7 @@ const Login = () => {
           <div className="flex flex-col gap-3 ">
             <label className="text-white">Email :</label>
             <input
-              type=""
+              type="email"
               className="h-[2.4rem] w-[15rem] px-3 rounded-lg bg-[#1F1F22] border-none  focus-visible:ring-1 focus-visible:ring-offset-1 ring-offset-[#5C5C7B] "
               name="email"
               onChange={changeHandler}

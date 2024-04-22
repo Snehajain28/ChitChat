@@ -6,7 +6,7 @@ import { FaRegUser } from "react-icons/fa";
 const Topbar = () => {
   const [{ user }, dispatch] = useStateValues();
 const navigate = useNavigate();
-  
+
 const signOutAccount = () => {
 dispatch ({
 type:"SET_USER",

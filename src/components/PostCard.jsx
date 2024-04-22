@@ -54,8 +54,8 @@ const PostCard = ({ post }) => {
   if (!post.creator) return;
 
   return (
-    <div className="bg-[#09090A] rounded-3xl border border-[#1F1F22] p-5 lg:p-7 w-full max-w-screen-sm">
-      <div className="flex justify-between items-center">
+    <div className="bg-[#09090A] rounded-3xl border border-[#1F1F22] p-5 lg:p-7 lg:w-[400px] w-full  max-w-screen-sm">
+      <div className="flex w-full justify-between items-center">
         <div className="flex items-center gap-3">
           <Link to={`/profile/${post.creator.$id}`}>
             <img
@@ -111,7 +111,7 @@ const PostCard = ({ post }) => {
         <img
           src={post.imageUrl || "/assets/icons/profile-placeholder.svg"}
           alt="post"
-          className="post-card_img"
+          className="mx-auto w-full h-64 xs:h-[400px] lg:h-[250px] lg:w-[250px] w-full rounded-[24px] object-cover mb-5"
         />
       </Link>
 

@@ -1,10 +1,11 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useStateValues } from "../Utils/Provider";
 import { getUserById, updateUser } from "../backend/api";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Loader from "../components/Loader";
 import { toast } from "react-toast";
 import ProfileUploader from "../components/ProfileUploader";
+import { BsPenFill } from "react-icons/bs";
 
 const UpdateProfile = () => {
 
@@ -12,6 +13,7 @@ const UpdateProfile = () => {
   const { id } = useParams();
   const [Loading, setLoading] = useState(false)
   const [{ user }, dispatch] = useStateValues();
+  const [currentUser, setCurrentUser] = useState();
 
   const [formData, setFormData] = useState({
     file: [],
@@ -21,8 +23,16 @@ const UpdateProfile = () => {
     bio: user.bio || "",
   })
 
-  const { currentUser } = getUserById(id || "");
- 
+  const getData = useCallback((async () => {
+    const data = await getUserById(id)
+    setCurrentUser(data);
+  }), [id])
+
+  useEffect((() => {
+    getData();
+  }), [getData])
+
+
   if (!currentUser)
     return (
       <div className="flex-center w-full h-full">
@@ -41,14 +51,15 @@ const UpdateProfile = () => {
   const fieldChangehandler = () => {
 
   }
-  
-  const handleUpdate = async (value) => {
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
     setLoading(true);
     const updatedUser = await updateUser({
       userId: currentUser.$id,
-      name: value.name,
-      bio: value.bio,
-      file: value.file,
+      name: formData.name,
+      bio: formData.bio,
+      file: formData.file,
       imageUrl: currentUser.imageUrl,
       imageId: currentUser.imageId,
     });
@@ -71,29 +82,21 @@ const UpdateProfile = () => {
 
   return (
     <div className="flex flex-1">
-      <div className="flex flex-col flex-1 items-center gap-10 overflow-scroll py-10 px-5 md:px-8 lg:p-14 custom-scrollbar">
+      <div className="flex flex-col flex-1 items-center gap-6 overflow-scroll py-2 px-5 md:px-8 lg:p-14 custom-scrollbar">
         <div className="flex justify-start items-center gap-3  w-full max-w-5xl">
-          <img
-            src="/assets/icons/edit.svg"
-            width={36}
-            height={36}
-            alt="edit"
-            className="invert-white"
-          />
+          <BsPenFill />
           <h2 className=" text-[24px] font-bold leading-[140%] tracking-tighter md:text-[30px] text-left w-full">Edit Profile</h2>
         </div>
 
         <div >
           <form onSubmit={handleUpdate}
-            className="flex flex-col gap-7 w-full mt-4 max-w-5xl">
+            className="flex flex-col gap-6 w-full  max-w-5xl">
 
-            <div className="flex flex-col gap-3 ">
-              <label className="text-white">Email :</label>
-
-               <ProfileUploader
-                      fieldChange={fieldChangehandler}
-                      mediaUrl={currentUser.imageUrl}
-                    /> 
+            <div className="flex justify-center items-center flex-col gap-5 ">
+              <ProfileUploader
+                fieldChange={fieldChangehandler}
+                mediaUrl={currentUser.imageUrl}
+              />
             </div>
 
             <div className="flex flex-col gap-3 ">
@@ -103,7 +106,7 @@ const UpdateProfile = () => {
                 className="h-[2.4rem] w-[15rem] px-3 rounded-lg bg-[#1F1F22] border-none  focus-visible:ring-1 focus-visible:ring-offset-1 ring-offset-[#5C5C7B] "
                 name="name"
                 onChange={changeHandler}
-                value={formData.email}
+                value={formData.name}
               />
             </div>
 
@@ -114,7 +117,19 @@ const UpdateProfile = () => {
                 className="h-[2.4rem] w-[15rem] px-3 rounded-lg bg-[#1F1F22] border-none  focus-visible:ring-1 focus-visible:ring-offset-1 ring-offset-[#5C5C7B] "
                 name="username"
                 onChange={changeHandler}
-                value={formData.email}
+                value={formData.username}
+              />
+            </div>
+
+            <div className="flex flex-col gap-3 ">
+              <label className="text-white">Bio :</label>
+              <input
+                type="text"
+                placeholder="bio"
+                className="h-[2.4rem] w-[15rem] px-3 rounded-lg bg-[#1F1F22] border-none  focus-visible:ring-1 focus-visible:ring-offset-1 ring-offset-[#5C5C7B] "
+                name="bio"
+                onChange={changeHandler}
+                value={formData.bio}
               />
             </div>
 
@@ -129,16 +144,7 @@ const UpdateProfile = () => {
               />
             </div>
 
-            <div className="flex flex-col gap-3 ">
-              <label className="text-white">Username :</label>
-              <input
-                type="text"
-                className="h-[2.4rem] w-[15rem] px-3 rounded-lg bg-[#1F1F22] border-none  focus-visible:ring-1 focus-visible:ring-offset-1 ring-offset-[#5C5C7B] "
-                name="bio"
-                onChange={changeHandler}
-                value={formData.email}
-              />
-            </div>
+
 
             <div className="flex gap-4 items-center justify-end">
               <button
