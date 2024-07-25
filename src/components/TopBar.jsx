@@ -1,20 +1,22 @@
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useStateValues } from "../Utils/Provider";
 import { IoIosLogOut } from "react-icons/io";
 import { FaRegUser } from "react-icons/fa";
+import SuprSendInbox from '@suprsend/react-inbox'
+import 'react-toastify/dist/ReactToastify.css' 
 
 const Topbar = () => {
   const [{ user }, dispatch] = useStateValues();
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
-const signOutAccount = () => {
-dispatch ({
-type:"SET_USER",
-user:null
-})
-localStorage.removeItem("user");
-navigate('/');
-}
+  const signOutAccount = () => {
+    dispatch({
+      type: "SET_USER",
+      user: null
+    })
+    localStorage.removeItem("user");
+    navigate('/');
+  }
 
   return (
     <section className="sticky top-0 z-50 md:hidden bg-[#09090a] w-full">
@@ -28,8 +30,15 @@ navigate('/');
             height={40}
           />
         </Link>
-
         <div className="flex gap-4">
+          <div>
+            <SuprSendInbox
+             theme={{bell : {color : 'white'}}}
+             workspaceKey="<workspace_key>"
+              subscriberId="<subscriber_id>"
+              distinctId="<distinct_id>"
+            />
+          </div>
           <button
             className="flex gap-4 items-center justify-start hover:bg-transparent hover:text-white"
             onClick={signOutAccount}>
